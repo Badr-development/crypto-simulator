@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         finalAmount.textContent = formatCurrency(result.finalAmount, currency);
         profit.textContent = formatCurrency(result.profit, currency);
 
-        // グラフ表示
-        displayChart(result.assetHistory, currency);
     });
 
     // リセットボタンのイベント
@@ -72,7 +70,7 @@ function isValidInput(amount, interest, duration) {
            !isNaN(duration) && duration >= 1 && duration <= 60;
 }
 
-function calculateInvestment(amount, interest, duration, isCompound, startDate) {
+function calculateInvestment(amount, interest, duration, isCompound) {
     let assetHistory = [];
     let currentAmount = amount;
 
@@ -83,12 +81,18 @@ function calculateInvestment(amount, interest, duration, isCompound, startDate) 
         });
 
         if (isCompound) {
-            // 複利計算
-            currentAmount *= (1 + interest / 100 / 12);
+            // 基本的な複利計算式 A = P(1 + r)^t
+            // ただし、1ヶ月ごとに計算するため、期間は1ヶ月分
+            currentAmount = amount * Math.pow(1 + interest / 100 / 12, month);
         } else {
-            // 単利計算
+            // 単利計算（運用期間終了時に一度だけ発生）
             if (month === duration) {
-                currentAmount += amount * (interest / 100) * (month / 12);
+                // 年利を月利に変換
+                const monthlyInterest = interest / 100 / 12;
+                // 運用期間中の利息合計を計算
+                const totalInterest = monthlyInterest * duration;
+                // 元本に利息を加算
+                currentAmount += amount * totalInterest;
             }
         }
     }
@@ -101,34 +105,5 @@ function calculateInvestment(amount, interest, duration, isCompound, startDate) 
 }
 
 function formatCurrency(amount, currency) {
-    return amount.toFixed(2) + ' ' + currency;
-}
-
-function displayChart(data, currency, jpyConversion) {
-    const ctx = document.getElementById('assetChart').getContext('2d');
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => d.month === 0 ? '開始' : `${d.month}ヶ月`),
-            datasets: [{
-                label: '資産推移',
-                data: data.map(d => d.amount),
-                borderColor: '#4CAF50',
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: value => {
-                            return formatCurrency(value, currency);
-                        }
-                    }
-                }
-            }
-        }
-    });
+    return Math.round(amount * 100000) / 100000 + ' ' + currency;
 }
