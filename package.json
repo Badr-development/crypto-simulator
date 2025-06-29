@@ -1,0 +1,9 @@
+{
+  "name": "crypto-simulator",
+  "version": "1.0.0",
+  "description": "仮想通貨運用シミュレーター",
+  "main": "index.html",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r index.html styles.css script.js dist/"
+  }
+}
