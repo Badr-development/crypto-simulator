@@ -116,6 +116,9 @@ button {
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 .result-item {
@@ -148,5 +151,13 @@ button {
     
     h1 {
         font-size: 1.3rem;
+    }
+    
+    .result-section {
+        padding: 1rem;
+    }
+    
+    .result-item {
+        margin-bottom: 1rem;
     }
 }
