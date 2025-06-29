@@ -1,4 +1,10 @@
 [build]
-  command = "cp index.html styles.css script.js ./dist/"
+  command = "mkdir -p dist && cp index.html styles.css script.js ./dist/"
   publish = "dist"
   base = "/"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[context.production.environment]
+  NODE_VERSION = "18"
