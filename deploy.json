@@ -1,0 +1,9 @@
+{
+  "name": "crypto-simulator",
+  "description": "仮想通貨運用シミュレーター",
+  "framework": "static",
+  "build": {
+    "command": "cp index.html styles.css script.js ./dist/",
+    "directory": "dist"
+  }
+}
