@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仮想通貨運用シミュレーター</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>仮想通貨運用シミュレーター</h1>
+        
+        <div class="input-section">
+            <div class="form-group">
+                <label for="currency">通貨選択:</label>
+                <select id="currency">
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="SOL">SOL</option>
+                    <option value="XRP">XRP</option>
+                    <option value="USDT">USDT</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">投資額:</label>
+                <input type="number" id="amount" step="0.01" min="0">
+                <span id="currency-symbol">BTC</span>
+            </div>
+
+            <div class="form-group">
+                <label for="interest">年利(%):</label>
+                <input type="number" id="interest" step="0.1" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="duration">運用期間(ヶ月):</label>
+                <input type="number" id="duration" min="1" max="60">
+            </div>
+
+            <div class="form-group">
+                <label>複利:</label>
+                <div class="radio-group">
+                    <input type="radio" id="compoundYes" name="compound" value="true">
+                    <label for="compoundYes">あり</label>
+                    <input type="radio" id="compoundNo" name="compound" value="false" checked>
+                    <label for="compoundNo">なし</label>
+                </div>
+            </div>
+
+
+        </div>
+
+        <button id="calculateBtn">計算</button>
+        <button id="resetBtn">リセット</button>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>計算結果</h2>
+            <div class="result-item">
+                <p>運用終了時の総資産額:</p>
+                <span id="finalAmount"></span>
+            </div>
+            <div class="result-item">
+                <p>運用益:</p>
+                <span id="profit"></span>
+            </div>
+
+            <div id="assetChart"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
