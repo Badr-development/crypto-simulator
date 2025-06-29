@@ -20,6 +20,9 @@ body {
     background-color: var(--primary-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -32,6 +35,8 @@ h1 {
     text-align: center;
     color: var(--text-color);
     margin-bottom: 2rem;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    letter-spacing: -0.02em;
 }
 
 .input-section {
@@ -128,6 +133,8 @@ button {
     .container {
         margin: 0.5rem;
         padding: 0.5rem;
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     .form-group {
@@ -137,5 +144,9 @@ button {
     button {
         width: 100%;
         margin: 0.5rem 0;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
     }
 }
